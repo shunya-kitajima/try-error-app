@@ -3,11 +3,16 @@ export type Daily = {
   created_at: string
   updated_at: string
   user_id: string
+  year: string
+  month: string
+  day: string
 }
 
 export type EditedDaily = {
   id: string
-  user_id: string
+  year: string
+  month: string
+  day: string
 }
 
 export type Try = {

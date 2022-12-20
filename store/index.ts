@@ -16,15 +16,18 @@ type State = {
 const useStore = create<State>((set) => ({
   session: null,
   setSession: (payload) => set({ session: payload }),
-  editedDaily: { id: '', user_id: '' },
+  editedDaily: { id: '', year: '', month: '', day: '' },
   updateEditedDaily: (payload) =>
     set({
       editedDaily: {
         id: payload.id,
-        user_id: payload.user_id,
+        year: payload.year,
+        month: payload.month,
+        day: payload.day,
       },
     }),
-  resetEditedDaily: () => set({ editedDaily: { id: '', user_id: '' } }),
+  resetEditedDaily: () =>
+    set({ editedDaily: { id: '', year: '', month: '', day: '' } }),
   editedTry: { id: '', try: '', result: '' },
   updateEditedTry: (payload) =>
     set({
