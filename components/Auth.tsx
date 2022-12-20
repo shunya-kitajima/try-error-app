@@ -40,7 +40,7 @@ export const Auth: React.FC = () => {
         </div>
         <div>
           <input
-            type="text"
+            type="password"
             required
             className="my-2 rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none"
             placeholder="Password"
