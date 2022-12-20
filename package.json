@@ -13,9 +13,11 @@
     "@supabase/supabase-js": "^2.2.1",
     "@tanstack/react-query": "^4.20.4",
     "@tanstack/react-query-devtools": "^4.20.4",
+    "date-fns": "^2.29.3",
     "next": "13.0.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-error-boundary": "^3.1.4",
     "zustand": "^4.1.5"
   },
   "devDependencies": {
