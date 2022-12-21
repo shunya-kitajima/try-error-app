@@ -1,11 +1,12 @@
 import type { NextPage } from 'next'
 import DailyForm from '../components/DailyForm'
+import { Layout } from '../components/Layout'
 
 const daily: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <Layout title="Try and Error">
       <DailyForm />
-    </div>
+    </Layout>
   )
 }
 
