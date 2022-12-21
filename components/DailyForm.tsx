@@ -27,10 +27,10 @@ const DailyForm: React.FC = () => {
           placeholder="try"
         />
         <textarea
-          cols={50}
+          cols={40}
           rows={10}
           className="my-2 rounded border border-gray-300 px-3 py-2 text-sm placeholder-gray-500 focus:border-indigo-500 focus:outline-none"
-          placeholder="content"
+          placeholder="result"
         />
         <button
           type="button"
