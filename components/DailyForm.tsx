@@ -32,6 +32,12 @@ const DailyForm: React.FC = () => {
           className="my-2 rounded border border-gray-300 px-3 py-2 text-sm placeholder-gray-500 focus:border-indigo-500 focus:outline-none"
           placeholder="content"
         />
+        <button
+          type="button"
+          className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
+        >
+          create
+        </button>
       </div>
     </>
   )
