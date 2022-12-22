@@ -10,6 +10,7 @@ export type Daily = {
 
 export type EditedDaily = {
   id: string
+  user_id: string
   year: string
   month: string
   day: string
