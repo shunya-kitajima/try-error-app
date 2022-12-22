@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
 import { Try } from '../types'
 
-const useQueryTry = (dailyId: string) => {
+export const useQueryTry = (dailyId: string) => {
   const getTries = async () => {
     const { data, error } = await supabase
       .from('tries')
@@ -19,5 +19,3 @@ const useQueryTry = (dailyId: string) => {
     staleTime: Infinity,
   })
 }
-
-export default useQueryTry
