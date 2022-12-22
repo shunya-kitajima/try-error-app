@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import useStore from '../store'
 import useMutateDaily from '../hooks/useMutateDaily'
 
-const DailyForm: React.FC = () => {
+export const DailyForm: React.FC = () => {
   const router = useRouter()
   const session = useStore((state) => state.session)
   const editedDaily = useStore((state) => state.editedDaily)
@@ -81,5 +81,3 @@ const DailyForm: React.FC = () => {
     </>
   )
 }
-
-export default DailyForm
