@@ -54,6 +54,31 @@ const useMutateTry = () => {
       },
     }
   )
+
+  const deleteTryMutation = useMutation(
+    async (id: string) => {
+      const { data, error } = await supabase.from('tries').delete().eq('id', id)
+      if (error) throw new Error(error.message)
+      return data
+    },
+    {
+      onSuccess: (_, variables) => {
+        let previousTries = queryClient.getQueryData<Try[]>(['tries'])
+        if (!previousTries) previousTries = []
+        queryClient.setQueryData(
+          ['tries'],
+          previousTries.filter((paramTry) => paramTry.id !== variables)
+        )
+        resetEditedTry()
+      },
+      onError: (err: any) => {
+        resetEditedTry()
+        throw new Error(err.message)
+      },
+    }
+  )
+
+  return { createTryMutation, updateTryMutation, deleteTryMutation }
 }
 
 export default useMutateTry
