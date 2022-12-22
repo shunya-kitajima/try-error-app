@@ -17,7 +17,7 @@ export const useMutateDaily = () => {
       onSuccess: (res) => {
         let previousDailies = queryClient.getQueryData<Daily[]>(['dailies'])
         if (!previousDailies) previousDailies = []
-        queryClient.setQueryData(['dailies'], [...previousDailies, res[0]])
+        queryClient.setQueryData(['dailies'], [...previousDailies, res])
         resetEditedDaily()
       },
       onError: (err: any) => {
@@ -43,7 +43,7 @@ export const useMutateDaily = () => {
         queryClient.setQueryData(
           ['dailies'],
           previousDailies.map((daily) =>
-            daily.id === variables.id ? res[0] : daily
+            daily.id === variables.id ? res : daily
           )
         )
         resetEditedDaily()
