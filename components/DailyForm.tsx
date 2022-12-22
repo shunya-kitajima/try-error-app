@@ -1,13 +1,36 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import Link from 'next/link'
-import { supabase } from '../utils/supabase'
+import { useRouter } from 'next/router'
 import useStore from '../store'
 import useMutateDaily from '../hooks/useMutateDaily'
 
 const DailyForm: React.FC = () => {
-  const { editedDaily } = useStore()
-  const { editedTry } = useStore()
+  const router = useRouter()
+  const session = useStore((state) => state.session)
+  const editedDaily = useStore((state) => state.editedDaily)
+  const editedTry = useStore((state) => state.editedTry)
   const updateEditedTry = useStore((state) => state.updateEditedTry)
+  const { createDailyMutation, updateDailyMutation } = useMutateDaily()
+
+  const dailyHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (editedDaily.id) {
+      await updateDailyMutation.mutateAsync(editedDaily)
+      router.push('/')
+    } else {
+      const now = new Date()
+      const year = now.getFullYear()
+      const month = now.getMonth() + 1
+      const date = now.getDate()
+      await createDailyMutation.mutateAsync({
+        user_id: session?.user?.id!,
+        year: String(year),
+        month: String(month),
+        date: String(date),
+      })
+      router.push('/')
+    }
+  }
 
   return (
     <>
@@ -23,8 +46,9 @@ const DailyForm: React.FC = () => {
         <button
           type="button"
           className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
+          onClick={(e) => dailyHandleSubmit(e)}
         >
-          submit
+          {editedDaily.id ? 'update' : 'create'}
         </button>
       </div>
       <div className="flex items-center justify-around">
