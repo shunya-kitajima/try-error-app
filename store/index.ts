@@ -29,18 +29,21 @@ const useStore = create<State>((set) => ({
     }),
   resetEditedDaily: () =>
     set({ editedDaily: { id: '', user_id: '', year: '', month: '', day: '' } }),
-  editedTry: { id: '', daily_id: '', try: '', result: '' },
+  editedTry: { id: '', user_id: '', daily_id: '', try: '', result: '' },
   updateEditedTry: (payload) =>
     set({
       editedTry: {
         id: payload.id,
+        user_id: payload.user_id,
         daily_id: payload.daily_id,
         try: payload.try,
         result: payload.result,
       },
     }),
   resetEditedTry: () =>
-    set({ editedTry: { id: '', daily_id: '', try: '', result: '' } }),
+    set({
+      editedTry: { id: '', user_id: '', daily_id: '', try: '', result: '' },
+    }),
 }))
 
 export default useStore
