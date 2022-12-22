@@ -31,7 +31,7 @@ export const useMutateDaily = () => {
     async (daily: EditedDaily) => {
       const { data, error } = await supabase
         .from('dailies')
-        .update({ year: daily.year, month: daily.month, day: daily.day })
+        .update({ year: daily.year, month: daily.month, date: daily.date })
         .eq('id', daily.id)
       if (error) throw new Error(error.message)
       return data

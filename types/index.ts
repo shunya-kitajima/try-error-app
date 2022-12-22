@@ -5,7 +5,7 @@ export type Daily = {
   user_id: string
   year: string
   month: string
-  day: string
+  date: string
 }
 
 export type EditedDaily = {
@@ -13,7 +13,7 @@ export type EditedDaily = {
   user_id: string
   year: string
   month: string
-  day: string
+  date: string
 }
 
 export type Try = {
