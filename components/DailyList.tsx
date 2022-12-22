@@ -8,7 +8,6 @@ export const DailyList: React.FC = () => {
 
   return (
     <>
-      <p>Daily</p>
       <ul>
         {dailies?.map((daily) => (
           <li key={daily.id}>{daily.id}</li>

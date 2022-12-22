@@ -5,6 +5,7 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/solid'
 import { supabase } from '../utils/supabase'
+import { Dailies } from './Dailies'
 
 export const DashBoard: React.FC = () => {
   const signOut = () => {
@@ -25,6 +26,7 @@ export const DashBoard: React.FC = () => {
           add Daily
         </button>
       </Link>
+      <Dailies />
     </>
   )
 }
