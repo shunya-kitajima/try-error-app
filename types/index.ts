@@ -27,6 +27,7 @@ export type Try = {
 
 export type EditedTry = {
   id: string
+  daily_id: string
   try: string
   result: string
 }
