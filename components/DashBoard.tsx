@@ -5,6 +5,7 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/solid'
 import { supabase } from '../utils/supabase'
+import { Layout } from './Layout'
 import { Dailies } from './Dailies'
 
 export const DashBoard: React.FC = () => {
@@ -13,7 +14,7 @@ export const DashBoard: React.FC = () => {
   }
 
   return (
-    <>
+    <Layout title="Try and Error">
       <ArrowRightOnRectangleIcon
         className="my-6 h-6 w-6 cursor-pointer text-blue-500"
         onClick={signOut}
@@ -27,6 +28,6 @@ export const DashBoard: React.FC = () => {
         </button>
       </Link>
       <Dailies />
-    </>
+    </Layout>
   )
 }
