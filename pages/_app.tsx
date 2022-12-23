@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { supabase } from '../utils/supabase'
-import useStore from '../store'
 
 const queryClient = new QueryClient({
   defaultOptions: {
