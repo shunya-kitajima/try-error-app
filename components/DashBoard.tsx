@@ -6,7 +6,7 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/solid'
 import { supabase } from '../utils/supabase'
-import { Dailies } from './Dailies'
+import { DailyList } from './DailyList'
 
 export const DashBoard: React.FC = () => {
   const queryClient = useQueryClient()
@@ -30,7 +30,7 @@ export const DashBoard: React.FC = () => {
           add Daily
         </button>
       </Link>
-      <Dailies />
+      <DailyList />
     </>
   )
 }
