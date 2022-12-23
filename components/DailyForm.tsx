@@ -2,12 +2,11 @@ import React, { MouseEvent } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useStore from '../store'
-import { supabase } from '../utils/supabase'
 import useMutateDaily from '../hooks/useMutateDaily'
 
 export const DailyForm: React.FC = () => {
   const router = useRouter()
-  const currentSession = supabase.auth.session()
+  const session = useStore((state) => state.session)
   const editedDaily = useStore((state) => state.editedDaily)
   const editedTry = useStore((state) => state.editedTry)
   const updateEditedTry = useStore((state) => state.updateEditedTry)
@@ -24,7 +23,7 @@ export const DailyForm: React.FC = () => {
       const month = now.getMonth() + 1
       const date = now.getDate()
       await createDailyMutation.mutateAsync({
-        user_id: currentSession?.user?.id!,
+        user_id: session?.user?.id!,
         year: String(year),
         month: String(month),
         date: String(date),

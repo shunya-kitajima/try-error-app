@@ -1,10 +1,10 @@
 import React from 'react'
-import { supabase } from '../utils/supabase'
+import useStore from '../store'
 import { useQueryDaily } from '../hooks/useQueryDaily'
 
 export const DailyList: React.FC = () => {
-  const currentSession = supabase.auth.session()
-  const { data: dailies } = useQueryDaily(currentSession?.user?.id!)
+  const session = useStore((state) => state.session)
+  const { data: dailies } = useQueryDaily(session?.user?.id!)
 
   return (
     <>
