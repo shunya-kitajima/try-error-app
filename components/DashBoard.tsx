@@ -1,4 +1,5 @@
 import React from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import {
   ArrowRightOnRectangleIcon,
@@ -9,7 +10,10 @@ import { Layout } from './Layout'
 import { Dailies } from './Dailies'
 
 export const DashBoard: React.FC = () => {
+  const queryClient = useQueryClient()
+
   const signOut = () => {
+    queryClient.removeQueries(['dailies'])
     supabase.auth.signOut()
   }
 
