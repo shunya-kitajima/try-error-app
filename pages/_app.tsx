@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { supabase } from '../utils/supabase'
+import useStore from '../store'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,9 +19,15 @@ const queryClient = new QueryClient({
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const { push, pathname } = useRouter()
+  const session = useStore((state) => state.session)
+  const setSession = useStore((state) => state.setSession)
 
   const validateSession = async () => {
     const user = await supabase.auth.getUser()
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
+    setSession(session)
     if (user && pathname === '/') {
       push('/dashboard')
     } else if (!user && pathname !== '/') {
@@ -29,6 +36,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }
 
   supabase.auth.onAuthStateChange((event, _) => {
+    setSession(session)
     if (event === 'SIGNED_IN' && pathname === '/') {
       push('/dashboard')
     } else if (event === 'SIGNED_OUT') {
