@@ -4,7 +4,6 @@ import {
   ArrowRightOnRectangleIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/solid'
-import useStore from '../store'
 import { supabase } from '../utils/supabase'
 import { Layout } from './Layout'
 import { Dailies } from './Dailies'
