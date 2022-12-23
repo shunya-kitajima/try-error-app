@@ -13,7 +13,7 @@ export const useMutateAuth = () => {
 
   const loginMutation = useMutation(
     async () => {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signIn({
         email,
         password,
       })
