@@ -11,7 +11,7 @@ export const useMutateDaily = () => {
     async (daily: Omit<EditedDaily, 'id'>) => {
       const { data, error } = await supabase.from('dailies').insert(daily)
       if (error) throw new Error(error.message)
-      return data
+      return data[0]
     },
     {
       onSuccess: (res) => {
@@ -34,7 +34,7 @@ export const useMutateDaily = () => {
         .update({ year: daily.year, month: daily.month, date: daily.date })
         .eq('id', daily.id)
       if (error) throw new Error(error.message)
-      return data
+      return data[0]
     },
     {
       onSuccess: (res, variables) => {
