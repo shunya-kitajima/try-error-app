@@ -28,14 +28,14 @@ export const DailyForm: React.FC = () => {
         month: String(month),
         date: String(date),
       })
-      router.push('/')
+      router.push('/dashboard')
     }
   }
 
   return (
     <>
       <div className="flex items-center justify-around">
-        <Link href={'/'} prefetch={false}>
+        <Link href={'/dashboard'} prefetch={false}>
           <button
             type="button"
             className="flex w-full justify-center rounded-md bg-slate-50 px-4 py-2 text-sm text-indigo-600"
