@@ -18,7 +18,7 @@ const Home: NextPage = () => {
   }, [setSession])
 
   return (
-    <Layout title="Dashboard">{!session ? <Auth /> : <DashBoard />}</Layout>
+    <Layout title="Try and Error">{!session ? <Auth /> : <DashBoard />}</Layout>
   )
 }
 
