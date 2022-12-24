@@ -28,7 +28,7 @@ export const DailyForm: React.FC = () => {
         month: String(month),
         date: String(date),
       })
-      router.push('/dashboard')
+      router.push('/')
     }
   }
 
