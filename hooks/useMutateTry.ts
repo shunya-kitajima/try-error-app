@@ -3,7 +3,7 @@ import { supabase } from '../utils/supabase'
 import useStore from '../store'
 import { Try, EditedTry } from '../types'
 
-const useMutateTry = () => {
+export const useMutateTry = () => {
   const queryClient = useQueryClient()
   const resetEditedTry = useStore((state) => state.resetEditedTry)
 
@@ -80,5 +80,3 @@ const useMutateTry = () => {
 
   return { createTryMutation, updateTryMutation, deleteTryMutation }
 }
-
-export default useMutateTry
