@@ -8,7 +8,7 @@ export const useMutateTry = () => {
   const resetEditedTry = useStore((state) => state.resetEditedTry)
 
   const createTryMutation = useMutation(
-    async (paramTry: EditedTry) => {
+    async (paramTry: Omit<EditedTry, 'id'>) => {
       const { data, error } = await supabase.from('tries').insert(paramTry)
       if (error) throw new Error(error.message)
       return data[0]
