@@ -1,5 +1,4 @@
 import React, { MouseEvent } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useStore from '../store'
 import { useMutateDaily } from '../hooks/useMutateDaily'
@@ -10,7 +9,14 @@ export const DailyForm: React.FC = () => {
   const editedDaily = useStore((state) => state.editedDaily)
   const editedTry = useStore((state) => state.editedTry)
   const updateEditedTry = useStore((state) => state.updateEditedTry)
-  const { createDailyMutation, updateDailyMutation } = useMutateDaily()
+  const { createDailyMutation, updateDailyMutation, deleteDailyMutation } =
+    useMutateDaily()
+
+  const deleteDailyHandler = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    await deleteDailyMutation.mutateAsync(editedDaily.id)
+    router.push('/')
+  }
 
   const dailyHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -35,14 +41,13 @@ export const DailyForm: React.FC = () => {
   return (
     <>
       <div className="flex items-center justify-around">
-        <Link href={'/'} prefetch={false}>
-          <button
-            type="button"
-            className="flex w-full justify-center rounded-md bg-slate-50 px-4 py-2 text-sm text-indigo-600"
-          >
-            cancel
-          </button>
-        </Link>
+        <button
+          type="button"
+          className="w-25 flex justify-center rounded-md bg-slate-50 px-4 py-2 text-sm text-indigo-600"
+          onClick={(e) => deleteDailyHandler(e)}
+        >
+          cancel
+        </button>
         <button
           type="button"
           className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
