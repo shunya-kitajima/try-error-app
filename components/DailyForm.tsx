@@ -2,7 +2,7 @@ import React, { MouseEvent } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useStore from '../store'
-import useMutateDaily from '../hooks/useMutateDaily'
+import { useMutateDaily } from '../hooks/useMutateDaily'
 
 export const DailyForm: React.FC = () => {
   const router = useRouter()
