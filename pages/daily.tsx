@@ -1,13 +1,13 @@
 import type { NextPage } from 'next'
 import { Layout } from '../components/Layout'
-import { DailyForm } from '../components/DailyForm'
+import { Daily } from '../components/Daily'
 
-const daily: NextPage = () => {
+const DailyPage: NextPage = () => {
   return (
     <Layout title="Try and Error">
-      <DailyForm />
+      <Daily />
     </Layout>
   )
 }
 
-export default daily
+export default DailyPage
