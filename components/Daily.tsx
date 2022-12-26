@@ -2,7 +2,7 @@ import React from 'react'
 import { DailyForm } from './DailyForm'
 import { TryForm } from './TryForm'
 
-const Daily: React.FC = () => {
+export const Daily: React.FC = () => {
   return (
     <>
       <DailyForm />
@@ -10,5 +10,3 @@ const Daily: React.FC = () => {
     </>
   )
 }
-
-export default Daily
