@@ -8,10 +8,7 @@ export const DailyForm: React.FC = () => {
   const router = useRouter()
   const session = useStore((state) => state.session)
   const editedDaily = useStore((state) => state.editedDaily)
-  const editedTry = useStore((state) => state.editedTry)
-  const updateEditedTry = useStore((state) => state.updateEditedTry)
   const { createDailyMutation, updateDailyMutation } = useMutateDaily()
-  console.log(editedDaily)
 
   const dailyHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -50,33 +47,6 @@ export const DailyForm: React.FC = () => {
           onClick={(e) => dailyHandleSubmit(e)}
         >
           {editedDaily.id === 'create' ? 'create' : 'update'}
-        </button>
-      </div>
-      <div className="flex items-center justify-around">
-        <input
-          type="text"
-          className="my-2 rounded border border-gray-300 px-3 py-2 text-sm placeholder-gray-500 focus:border-indigo-500 focus:outline-none"
-          placeholder="try"
-          value={editedTry.try}
-          onChange={(e) =>
-            updateEditedTry({ ...editedTry, try: e.target.value })
-          }
-        />
-        <textarea
-          cols={40}
-          rows={10}
-          className="my-2 rounded border border-gray-300 px-3 py-2 text-sm placeholder-gray-500 focus:border-indigo-500 focus:outline-none"
-          placeholder="result"
-          value={editedTry.result}
-          onChange={(e) =>
-            updateEditedTry({ ...editedTry, result: e.target.value })
-          }
-        />
-        <button
-          type="button"
-          className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
-        >
-          {editedTry.id ? 'update' : 'create'}
         </button>
       </div>
     </>
