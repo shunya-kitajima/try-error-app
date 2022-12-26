@@ -5,14 +5,17 @@ import { useMutateTry } from '../hooks/useMutateTry'
 import { EditedTry } from '../types'
 
 export const TryForm: React.FC = () => {
-  const [editedTry, setEditedTry] = useState<EditedTry>({
-    id: '',
-    try: '',
-    result: '',
-  })
   const router = useRouter()
   const session = useStore((state) => state.session)
   const editedDaily = useStore((state) => state.editedDaily)
+  const [editedTry, setEditedTry] = useState<EditedTry>({
+    id: '',
+    user_id: editedDaily.user_id,
+    daily_id: editedDaily.id,
+    try: '',
+    result: '',
+  })
+
   const { createTryMutation, updateTryMutation } = useMutateTry()
 
   const tryHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -20,7 +23,12 @@ export const TryForm: React.FC = () => {
     if (editedTry.id) {
       await updateTryMutation.mutateAsync(editedTry)
     } else {
-      await createTryMutation.mutateAsync(editedTry)
+      await createTryMutation.mutateAsync({
+        user_id: editedDaily.user_id,
+        daily_id: editedDaily.id,
+        try: editedTry.try,
+        result: editedTry.result,
+      })
     }
   }
 
