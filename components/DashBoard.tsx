@@ -36,7 +36,7 @@ export const DashBoard: React.FC = () => {
     })
     updateEditedDaily({
       id: data.id,
-      user_id: data.id,
+      user_id: data.user_id,
       year: data.year,
       month: data.month,
       date: data.date,
