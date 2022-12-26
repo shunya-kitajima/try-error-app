@@ -1,6 +1,7 @@
 import React from 'react'
 import useStore from '../store'
 import { useQueryDaily } from '../hooks/useQueryDaily'
+import DailyItem from './DailyItem'
 
 export const DailyList: React.FC = () => {
   const session = useStore((state) => state.session)
@@ -10,7 +11,14 @@ export const DailyList: React.FC = () => {
     <>
       <ul>
         {dailies?.map((daily) => (
-          <li key={daily.id}>{daily.id}</li>
+          <DailyItem
+            key={daily.id}
+            id={daily.id}
+            user_id={daily.user_id}
+            year={daily.year}
+            month={daily.month}
+            date={daily.date}
+          />
         ))}
       </ul>
     </>
