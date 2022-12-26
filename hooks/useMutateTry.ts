@@ -11,13 +11,13 @@ const useMutateTry = () => {
     async (paramTry: EditedTry) => {
       const { data, error } = await supabase.from('tries').insert(paramTry)
       if (error) throw new Error(error.message)
-      return data
+      return data[0]
     },
     {
       onSuccess: (res) => {
         let previousTries = queryClient.getQueryData<Try[]>(['tries'])
         if (!previousTries) previousTries = []
-        queryClient.setQueryData(['tries'], [...previousTries, res[0]])
+        queryClient.setQueryData(['tries'], [...previousTries, res])
         resetEditedTry()
       },
       onError: (err: any) => {
@@ -34,7 +34,7 @@ const useMutateTry = () => {
         .update({ try: paramTry.try, result: paramTry.result })
         .eq('id', paramTry.id)
       if (error) throw new Error(error.message)
-      return data
+      return data[0]
     },
     {
       onSuccess: (res, variables) => {
@@ -43,7 +43,7 @@ const useMutateTry = () => {
         queryClient.setQueryData(
           ['tries'],
           previousTries.map((paramTry) =>
-            paramTry.id === variables.id ? res[0] : paramTry
+            paramTry.id === variables.id ? res : paramTry
           )
         )
         resetEditedTry()
