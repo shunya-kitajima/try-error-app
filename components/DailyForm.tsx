@@ -11,13 +11,11 @@ export const DailyForm: React.FC = () => {
   const editedTry = useStore((state) => state.editedTry)
   const updateEditedTry = useStore((state) => state.updateEditedTry)
   const { createDailyMutation, updateDailyMutation } = useMutateDaily()
+  console.log(editedDaily)
 
   const dailyHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    if (editedDaily.id) {
-      await updateDailyMutation.mutateAsync(editedDaily)
-      router.push('/')
-    } else {
+    if (editedDaily.id === 'create') {
       const now = new Date()
       const year = now.getFullYear()
       const month = now.getMonth() + 1
@@ -28,6 +26,9 @@ export const DailyForm: React.FC = () => {
         month: String(month),
         date: String(date),
       })
+      router.push('/')
+    } else {
+      await updateDailyMutation.mutateAsync(editedDaily)
       router.push('/')
     }
   }
@@ -48,7 +49,7 @@ export const DailyForm: React.FC = () => {
           className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
           onClick={(e) => dailyHandleSubmit(e)}
         >
-          {editedDaily.id ? 'update' : 'create'}
+          {editedDaily.id === 'create' ? 'create' : 'update'}
         </button>
       </div>
       <div className="flex items-center justify-around">

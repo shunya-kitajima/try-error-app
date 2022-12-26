@@ -6,10 +6,13 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/solid'
 import { supabase } from '../utils/supabase'
+import useStore from '../store'
 import { DailyList } from './DailyList'
 
 export const DashBoard: React.FC = () => {
   const queryClient = useQueryClient()
+  const session = useStore((state) => state.session)
+  const updateEditedDaily = useStore((state) => state.updateEditedDaily)
 
   const signOut = () => {
     queryClient.removeQueries(['dailies'])
@@ -26,6 +29,15 @@ export const DashBoard: React.FC = () => {
         <button
           type="button"
           className="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
+          onClick={() => {
+            updateEditedDaily({
+              id: 'create',
+              user_id: session?.user?.id!,
+              year: '',
+              month: '',
+              date: '',
+            })
+          }}
         >
           add Daily
         </button>
