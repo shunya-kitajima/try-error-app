@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
 import { useMutateTry } from '../hooks/useMutateTry'
+import { EditedTry } from '../types'
 
 type Props = {
   id: string
@@ -8,6 +9,7 @@ type Props = {
   daily_id: string
   paramTry: string
   result: string
+  setEditedTry: Dispatch<SetStateAction<EditedTry>>
 }
 
 export const TryItem: React.FC<Props> = ({
@@ -16,6 +18,7 @@ export const TryItem: React.FC<Props> = ({
   daily_id,
   paramTry,
   result,
+  setEditedTry,
 }) => {
   const { deleteTryMutation } = useMutateTry()
 
@@ -24,8 +27,22 @@ export const TryItem: React.FC<Props> = ({
       <div className="flex">{paramTry}</div>
       <div className="flex">{result}</div>
       <div className="flex">
-        <PencilIcon className="mx-1 h-5 w-5 cursor-pointer text-blue-500" />
-        <TrashIcon className="h-5 w-5 cursor-pointer text-blue-500" />
+        <PencilIcon
+          className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
+          onClick={() =>
+            setEditedTry({
+              id: id,
+              user_id: user_id,
+              daily_id: daily_id,
+              try: paramTry,
+              result: result,
+            })
+          }
+        />
+        <TrashIcon
+          className="h-5 w-5 cursor-pointer text-blue-500"
+          onClick={() => deleteTryMutation.mutate(id)}
+        />
       </div>
     </li>
   )

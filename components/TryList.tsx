@@ -18,6 +18,8 @@ export const TryList: React.FC<Props> = ({ daily_id, setEditedTry }) => {
           <TryItem
             key={paramTry.id}
             id={paramTry.id}
+            user_id={paramTry.user_id}
+            daily_id={paramTry.daily_id}
             paramTry={paramTry.try}
             result={paramTry.result}
             setEditedTry={setEditedTry}
