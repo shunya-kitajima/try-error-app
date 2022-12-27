@@ -2,10 +2,14 @@ import React, { MouseEvent } from 'react'
 import { useRouter } from 'next/router'
 import useStore from '../store'
 import { useMutateDaily } from '../hooks/useMutateDaily'
+import { EditedDaily } from '../types'
 
-export const DailyForm: React.FC = () => {
+type Props = {
+  editedDaily: EditedDaily
+}
+
+export const DailyForm: React.FC<Props> = ({ editedDaily }) => {
   const router = useRouter()
-  const editedDaily = useStore((state) => state.editedDaily)
   const { deleteDailyMutation } = useMutateDaily()
 
   const deleteDailyHandler = async (e: MouseEvent<HTMLButtonElement>) => {

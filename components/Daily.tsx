@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import useStore from '../store'
 import { DailyForm } from './DailyForm'
 import { TryForm } from './TryForm'
 import { EditedTry } from '../types'
 
 export const Daily: React.FC = () => {
+  const editedDaily = useStore((state) => state.editedDaily)
   const [editedTry, setEditedTry] = useState<EditedTry>({
     id: '',
     user_id: '',
@@ -14,8 +16,12 @@ export const Daily: React.FC = () => {
 
   return (
     <>
-      <DailyForm />
-      <TryForm editedTry={editedTry} setEditedTry={setEditedTry} />
+      <DailyForm editedDaily={editedDaily} />
+      <TryForm
+        editedDaily={editedDaily}
+        editedTry={editedTry}
+        setEditedTry={setEditedTry}
+      />
     </>
   )
 }
