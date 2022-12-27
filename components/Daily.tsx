@@ -3,6 +3,7 @@ import useStore from '../store'
 import { DailyForm } from './DailyForm'
 import { TryForm } from './TryForm'
 import { EditedTry } from '../types'
+import { TryList } from './TryList'
 
 export const Daily: React.FC = () => {
   const editedDaily = useStore((state) => state.editedDaily)
@@ -22,6 +23,7 @@ export const Daily: React.FC = () => {
         editedTry={editedTry}
         setEditedTry={setEditedTry}
       />
+      <TryList daily_id={editedDaily.id} setEditedTry={setEditedTry} />
     </>
   )
 }
