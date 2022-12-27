@@ -1,6 +1,5 @@
 import React, { MouseEvent } from 'react'
 import { useRouter } from 'next/router'
-import useStore from '../store'
 import { useMutateDaily } from '../hooks/useMutateDaily'
 import { EditedDaily } from '../types'
 
