@@ -1,14 +1,19 @@
-import React, { useState, MouseEvent } from 'react'
+import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
 import { useRouter } from 'next/router'
 import useStore from '../store'
 import { useMutateTry } from '../hooks/useMutateTry'
 import { EditedTry } from '../types'
 
-export const TryForm: React.FC = () => {
+type Props = {
+  editedTry: EditedTry
+  setEditedTry: Dispatch<SetStateAction<EditedTry>>
+}
+
+export const TryForm: React.FC<Props> = ({ editedTry, setEditedTry }) => {
   const router = useRouter()
   const session = useStore((state) => state.session)
   const editedDaily = useStore((state) => state.editedDaily)
-  const [editedTry, setEditedTry] = useState<EditedTry>({
+  setEditedTry({
     id: '',
     user_id: editedDaily.user_id,
     daily_id: editedDaily.id,
