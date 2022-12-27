@@ -17,20 +17,19 @@ export const TryForm: React.FC<Props> = ({
 }) => {
   const router = useRouter()
   const session = useStore((state) => state.session)
-  setEditedTry({
-    id: '',
-    user_id: editedDaily.user_id,
-    daily_id: editedDaily.id,
-    try: '',
-    result: '',
-  })
 
   const { createTryMutation, updateTryMutation } = useMutateTry()
 
   const tryHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (editedTry.id) {
-      await updateTryMutation.mutateAsync(editedTry)
+      await updateTryMutation.mutateAsync({
+        id: editedTry.id,
+        user_id: editedDaily.user_id,
+        daily_id: editedDaily.id,
+        try: editedTry.try,
+        result: editedTry.result,
+      })
     } else {
       await createTryMutation.mutateAsync({
         user_id: editedDaily.user_id,
