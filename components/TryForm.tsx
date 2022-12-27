@@ -30,12 +30,26 @@ export const TryForm: React.FC<Props> = ({
         try: editedTry.try,
         result: editedTry.result,
       })
+      setEditedTry({
+        id: '',
+        user_id: '',
+        daily_id: '',
+        try: '',
+        result: '',
+      })
     } else {
       await createTryMutation.mutateAsync({
         user_id: editedDaily.user_id,
         daily_id: editedDaily.id,
         try: editedTry.try,
         result: editedTry.result,
+      })
+      setEditedTry({
+        id: '',
+        user_id: '',
+        daily_id: '',
+        try: '',
+        result: '',
       })
     }
   }
