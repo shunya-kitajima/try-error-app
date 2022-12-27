@@ -4,13 +4,12 @@ import { useMutateDaily } from '../hooks/useMutateDaily'
 
 type Props = {
   id: string
-  user_id: string
   year: string
   month: string
   date: string
 }
 
-const DailyItem: React.FC<Props> = ({ id, user_id, year, month, date }) => {
+const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
   const { deleteDailyMutation } = useMutateDaily()
 
   return (

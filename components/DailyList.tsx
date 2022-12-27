@@ -14,7 +14,6 @@ export const DailyList: React.FC = () => {
           <DailyItem
             key={daily.id}
             id={daily.id}
-            user_id={daily.user_id}
             year={daily.year}
             month={daily.month}
             date={daily.date}
