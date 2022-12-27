@@ -5,7 +5,6 @@ import { useMutateDaily } from '../hooks/useMutateDaily'
 
 export const DailyForm: React.FC = () => {
   const router = useRouter()
-  const session = useStore((state) => state.session)
   const editedDaily = useStore((state) => state.editedDaily)
   const { deleteDailyMutation } = useMutateDaily()
 
