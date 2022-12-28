@@ -13,6 +13,7 @@ type State = {
   resetEditedTry: () => void
   isCreate: string
   updateIsCreate: (flag: string) => void
+  resetIsCreate: () => void
 }
 
 const useStore = create<State>((set) => ({
@@ -50,6 +51,7 @@ const useStore = create<State>((set) => ({
     }),
   isCreate: '',
   updateIsCreate: (flag) => set({ isCreate: flag }),
+  resetIsCreate: () => set({ isCreate: '' }),
 }))
 
 export default useStore
