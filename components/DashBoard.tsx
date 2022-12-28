@@ -12,6 +12,7 @@ export const DashBoard: React.FC = () => {
   const router = useRouter()
   const session = useStore((state) => state.session)
   const updateEditedDaily = useStore((state) => state.updateEditedDaily)
+  const updateIsCreate = useStore((state) => state.updateIsCreate)
   const { createDailyMutation } = useMutateDaily()
 
   const signOut = () => {
@@ -38,6 +39,7 @@ export const DashBoard: React.FC = () => {
       month: data.month,
       date: data.date,
     })
+    updateIsCreate('create')
     router.push('/daily')
   }
 
