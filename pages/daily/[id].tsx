@@ -13,6 +13,14 @@ const getAllDailyIds = async () => {
   })
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = await getAllDailyIds()
+  return {
+    paths,
+    fallback: 'blocking',
+  }
+}
+
 const DailyPage: NextPage = () => {
   return <div></div>
 }
