@@ -11,6 +11,7 @@ type State = {
   editedTry: EditedTry
   updateEditedTry: (payload: EditedTry) => void
   resetEditedTry: () => void
+  isCreate: string
 }
 
 const useStore = create<State>((set) => ({
@@ -46,6 +47,7 @@ const useStore = create<State>((set) => ({
     set({
       editedTry: { id: '', user_id: '', daily_id: '', try: '', result: '' },
     }),
+  isCreate: '',
 }))
 
 export default useStore
