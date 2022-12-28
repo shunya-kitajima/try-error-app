@@ -27,7 +27,6 @@ export const DailyForm: React.FC<Props> = ({ editedDaily }) => {
         >
           cancel
         </button>
-
         <button
           type="button"
           className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
