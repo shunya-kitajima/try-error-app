@@ -1,10 +1,7 @@
 import React, { MouseEvent } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import {
-  ArrowRightOnRectangleIcon,
-  ExclamationCircleIcon,
-} from '@heroicons/react/24/solid'
+import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
 import { supabase } from '../utils/supabase'
 import useStore from '../store'
 import { useMutateDaily } from '../hooks/useMutateDaily'
