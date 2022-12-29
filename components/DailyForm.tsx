@@ -1,10 +1,9 @@
 import React, { MouseEvent } from 'react'
-import useStore from '../store'
+import { supabase } from '../utils/supabase'
 import { useMutateDaily } from '../hooks/useMutateDaily'
 import { Spinner } from './Spinner'
 
 export const DailyForm: React.FC = () => {
-  const { session } = useStore()
   const { createDailyMutation } = useMutateDaily()
 
   const addDailyHandler = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -14,7 +13,7 @@ export const DailyForm: React.FC = () => {
     const month = now.getMonth() + 1
     const date = now.getDate()
     await createDailyMutation.mutateAsync({
-      user_id: session?.user?.id!,
+      user_id: supabase.auth.user()?.id!,
       year: String(year),
       month: String(month),
       date: String(date),
