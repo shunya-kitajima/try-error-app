@@ -1,7 +1,10 @@
 import '../styles/globals.css'
+import { useEffect } from 'react'
 import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { supabase } from '../utils/supabase'
 
 const queryClient = new QueryClient({
   defaultOptions: {
