@@ -1,11 +1,10 @@
-import { useQueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
 import useStore from '../store'
 import { revalidateList, revalidateSingle } from '../utils/revalidation'
 import { Daily, EditedDaily } from '../types'
 
 export const useMutateDaily = () => {
-  const queryClient = useQueryClient()
   const resetEditedDaily = useStore((state) => state.resetEditedDaily)
 
   const createDailyMutation = useMutation(
