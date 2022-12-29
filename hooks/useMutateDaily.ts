@@ -53,11 +53,10 @@ export const useMutateDaily = () => {
       return data
     },
     {
-      onSuccess: (_, variables) => {
+      onSuccess: () => {
         revalidateList()
       },
       onError: (err: any) => {
-        resetEditedDaily()
         throw new Error(err.message)
       },
     }
