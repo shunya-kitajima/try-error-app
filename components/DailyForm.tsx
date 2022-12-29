@@ -1,42 +1,38 @@
 import React, { MouseEvent } from 'react'
-import { useRouter } from 'next/router'
 import useStore from '../store'
 import { useMutateDaily } from '../hooks/useMutateDaily'
-import { EditedDaily } from '../types'
+import { Spinner } from './Spinner'
 
-type Props = {
-  editedDaily: EditedDaily
-}
+export const DailyForm: React.FC = () => {
+  const { session } = useStore()
+  const { createDailyMutation } = useMutateDaily()
 
-export const DailyForm: React.FC<Props> = ({ editedDaily }) => {
-  const router = useRouter()
-  const isCreate = useStore((state) => state.isCreate)
-  const { deleteDailyMutation } = useMutateDaily()
-
-  const deleteDailyHandler = async (e: MouseEvent<HTMLButtonElement>) => {
+  const addDailyHandler = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    await deleteDailyMutation.mutateAsync(editedDaily.id)
-    router.push('/')
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+    const date = now.getDate()
+    await createDailyMutation.mutateAsync({
+      user_id: session?.user?.id!,
+      year: String(year),
+      month: String(month),
+      date: String(date),
+    })
   }
+
+  if (createDailyMutation.isLoading || createDailyMutation.isError)
+    return <Spinner />
 
   return (
     <>
       <div className="flex items-center justify-around">
-        {isCreate === 'create' && (
-          <button
-            type="button"
-            className="w-25 flex justify-center rounded-md bg-slate-50 px-4 py-2 text-sm text-indigo-600"
-            onClick={(e) => deleteDailyHandler(e)}
-          >
-            cancel
-          </button>
-        )}
         <button
           type="button"
           className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
-          onClick={() => router.push('/')}
+          onClick={(e) => addDailyHandler(e)}
         >
-          {isCreate === 'create' ? 'create' : 'back to index'}
+          add Daily
         </button>
       </div>
     </>
