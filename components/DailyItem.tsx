@@ -15,8 +15,12 @@ const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
 
   return (
     <li className="my-3">
-      <Link href={`/daily/${id}`} prefetch={false}>
-        <a className="cursor-pointer hover:text-pink-600">{`${year}/${month}/${date}`}</a>
+      <Link
+        href={`/daily/${id}`}
+        prefetch={false}
+        className="cursor-pointer hover:text-pink-600"
+      >
+        {`${year}/${month}/${date}`}
       </Link>
       <div className="flex">
         <TrashIcon
