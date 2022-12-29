@@ -12,9 +12,12 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<Data | Msg>
 ) => {
+  const {
+    query: { id },
+  } = req
   let revalidated = false
   try {
-    await res.revalidate('/dailies')
+    await res.revalidate(`/daily/${id}`)
     revalidated = true
   } catch (err) {
     console.log(err)
