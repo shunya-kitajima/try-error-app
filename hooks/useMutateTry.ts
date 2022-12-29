@@ -1,6 +1,7 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
 import useStore from '../store'
+import { revalidateSingle } from '../utils/revalidation'
 import { Try, EditedTry } from '../types'
 
 export const useMutateTry = () => {
@@ -14,8 +15,10 @@ export const useMutateTry = () => {
       return data[0]
     },
     {
+      onSuccess: (res) => {
+        revalidateSingle(res.daily_id)
+      },
       onError: (err: any) => {
-        resetEditedTry()
         throw new Error(err.message)
       },
     }
@@ -31,8 +34,10 @@ export const useMutateTry = () => {
       return data[0]
     },
     {
+      onSuccess: (res) => {
+        revalidateSingle(res.daily_id)
+      },
       onError: (err: any) => {
-        resetEditedTry()
         throw new Error(err.message)
       },
     }
@@ -42,11 +47,13 @@ export const useMutateTry = () => {
     async (id: string) => {
       const { data, error } = await supabase.from('tries').delete().eq('id', id)
       if (error) throw new Error(error.message)
-      return data
+      return data[0]
     },
     {
+      onSuccess: (res) => {
+        revalidateSingle(res.daily_id)
+      },
       onError: (err: any) => {
-        resetEditedTry()
         throw new Error(err.message)
       },
     }
