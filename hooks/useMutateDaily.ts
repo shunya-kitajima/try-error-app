@@ -1,6 +1,7 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
 import useStore from '../store'
+import { revalidateList, revalidateSingle } from '../utils/revalidation'
 import { Daily, EditedDaily } from '../types'
 
 export const useMutateDaily = () => {
@@ -11,11 +12,13 @@ export const useMutateDaily = () => {
     async (daily: Omit<Daily, 'id' | 'created_at' | 'tries'>) => {
       const { data, error } = await supabase.from('dailies').insert(daily)
       if (error) throw new Error(error.message)
-      return data[0]
+      return data
     },
     {
+      onSuccess: () => {
+        revalidateList()
+      },
       onError: (err: any) => {
-        resetEditedDaily()
         throw new Error(err.message)
       },
     }
@@ -28,9 +31,12 @@ export const useMutateDaily = () => {
         .update({ year: daily.year, month: daily.month, date: daily.date })
         .eq('id', daily.id)
       if (error) throw new Error(error.message)
-      return data[0]
+      return data
     },
     {
+      onSuccess: (res) => {
+        revalidateSingle(res[0].id)
+      },
       onError: (err: any) => {
         resetEditedDaily()
         throw new Error(err.message)
@@ -48,6 +54,9 @@ export const useMutateDaily = () => {
       return data
     },
     {
+      onSuccess: (_, variables) => {
+        revalidateList()
+      },
       onError: (err: any) => {
         resetEditedDaily()
         throw new Error(err.message)
