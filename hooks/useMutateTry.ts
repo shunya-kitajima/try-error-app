@@ -14,12 +14,6 @@ export const useMutateTry = () => {
       return data[0]
     },
     {
-      onSuccess: (res) => {
-        let previousTries = queryClient.getQueryData<Try[]>(['tries'])
-        if (!previousTries) previousTries = []
-        queryClient.setQueryData(['tries'], [...previousTries, res])
-        resetEditedTry()
-      },
       onError: (err: any) => {
         resetEditedTry()
         throw new Error(err.message)
@@ -37,17 +31,6 @@ export const useMutateTry = () => {
       return data[0]
     },
     {
-      onSuccess: (res, variables) => {
-        let previousTries = queryClient.getQueryData<Try[]>(['tries'])
-        if (!previousTries) previousTries = []
-        queryClient.setQueryData(
-          ['tries'],
-          previousTries.map((paramTry) =>
-            paramTry.id === variables.id ? res : paramTry
-          )
-        )
-        resetEditedTry()
-      },
       onError: (err: any) => {
         resetEditedTry()
         throw new Error(err.message)
@@ -62,15 +45,6 @@ export const useMutateTry = () => {
       return data
     },
     {
-      onSuccess: (_, variables) => {
-        let previousTries = queryClient.getQueryData<Try[]>(['tries'])
-        if (!previousTries) previousTries = []
-        queryClient.setQueryData(
-          ['tries'],
-          previousTries.filter((paramTry) => paramTry.id !== variables)
-        )
-        resetEditedTry()
-      },
       onError: (err: any) => {
         resetEditedTry()
         throw new Error(err.message)
