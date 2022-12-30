@@ -1,12 +1,9 @@
 import { useMutation } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
-import useStore from '../store'
 import { revalidateList, revalidateSingle } from '../utils/revalidation'
 import { Daily, EditedDaily } from '../types'
 
 export const useMutateDaily = () => {
-  const resetEditedDaily = useStore((state) => state.resetEditedDaily)
-
   const createDailyMutation = useMutation(
     async (daily: Omit<Daily, 'id' | 'created_at' | 'tries'>) => {
       const { data, error } = await supabase.from('dailies').insert(daily)
