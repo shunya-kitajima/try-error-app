@@ -37,7 +37,6 @@ export const useMutateDaily = () => {
         revalidateSingle(res[0].id)
       },
       onError: (err: any) => {
-        resetEditedDaily()
         throw new Error(err.message)
       },
     }
