@@ -5,7 +5,6 @@ import { EditedTry } from '../types'
 
 type Props = {
   id: string
-  user_id: string
   daily_id: string
   paramTry: string
   result: string
@@ -14,7 +13,6 @@ type Props = {
 
 export const TryItem: React.FC<Props> = ({
   id,
-  user_id,
   daily_id,
   paramTry,
   result,
@@ -32,7 +30,6 @@ export const TryItem: React.FC<Props> = ({
           onClick={() =>
             setEditedTry({
               id: id,
-              user_id: user_id,
               daily_id: daily_id,
               try: paramTry,
               result: result,
