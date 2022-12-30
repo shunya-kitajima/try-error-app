@@ -1,14 +1,13 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
+import useStore from '../store'
 import { useMutateTry } from '../hooks/useMutateTry'
-import { EditedTry } from '../types'
 
 type Props = {
   id: string
   daily_id: string
   paramTry: string
   result: string
-  setEditedTry: Dispatch<SetStateAction<EditedTry>>
 }
 
 export const TryItem: React.FC<Props> = ({
@@ -16,8 +15,8 @@ export const TryItem: React.FC<Props> = ({
   daily_id,
   paramTry,
   result,
-  setEditedTry,
 }) => {
+  const { updateEditedTry } = useStore()
   const { deleteTryMutation } = useMutateTry()
 
   return (
@@ -28,7 +27,7 @@ export const TryItem: React.FC<Props> = ({
         <PencilIcon
           className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
           onClick={() =>
-            setEditedTry({
+            updateEditedTry({
               id: id,
               daily_id: daily_id,
               try: paramTry,
