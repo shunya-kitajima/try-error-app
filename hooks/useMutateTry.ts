@@ -1,11 +1,10 @@
-import { useQueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
 import useStore from '../store'
 import { revalidateSingle } from '../utils/revalidation'
 import { Try, EditedTry } from '../types'
 
 export const useMutateTry = () => {
-  const queryClient = useQueryClient()
   const resetEditedTry = useStore((state) => state.resetEditedTry)
 
   const createTryMutation = useMutation(
