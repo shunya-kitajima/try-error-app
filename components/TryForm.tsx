@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
-import { useRouter } from 'next/router'
-import useStore from '../store'
+import { supabase } from '../utils/supabase'
 import { useMutateTry } from '../hooks/useMutateTry'
+import { Spinner } from './Spinner'
 import { EditedDaily, EditedTry } from '../types'
 
 type Props = {
@@ -15,9 +15,6 @@ export const TryForm: React.FC<Props> = ({
   editedTry,
   setEditedTry,
 }) => {
-  const router = useRouter()
-  const session = useStore((state) => state.session)
-
   const { createTryMutation, updateTryMutation } = useMutateTry()
 
   const tryHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -25,34 +22,34 @@ export const TryForm: React.FC<Props> = ({
     if (editedTry.id) {
       await updateTryMutation.mutateAsync({
         id: editedTry.id,
-        user_id: editedDaily.user_id,
         daily_id: editedDaily.id,
         try: editedTry.try,
         result: editedTry.result,
       })
       setEditedTry({
         id: '',
-        user_id: '',
         daily_id: '',
         try: '',
         result: '',
       })
     } else {
       await createTryMutation.mutateAsync({
-        user_id: editedDaily.user_id,
+        user_id: supabase.auth.user()?.id!,
         daily_id: editedDaily.id,
         try: editedTry.try,
         result: editedTry.result,
       })
       setEditedTry({
         id: '',
-        user_id: '',
         daily_id: '',
         try: '',
         result: '',
       })
     }
   }
+
+  if (createTryMutation.isLoading || updateTryMutation.isLoading)
+    return <Spinner />
 
   return (
     <>
