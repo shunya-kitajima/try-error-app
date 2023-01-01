@@ -1,10 +1,11 @@
-import { useMutation } from '@tanstack/react-query'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
 import useStore from '../store'
 import { revalidateSingle } from '../utils/revalidation'
 import { Try, EditedTry } from '../types'
 
 export const useMutateTry = () => {
+  const queryClient = useQueryClient()
   const resetEditedTry = useStore((state) => state.resetEditedTry)
 
   const createTryMutation = useMutation(
@@ -15,7 +16,10 @@ export const useMutateTry = () => {
     },
     {
       onSuccess: (res) => {
-        revalidateSingle(res.daily_id)
+        let previousTries = queryClient.getQueryData<Try[]>(['tries'])
+        if (!previousTries) previousTries = []
+        queryClient.setQueryData(['tries'], [...previousTries, res])
+        resetEditedTry()
       },
       onError: (err: any) => {
         throw new Error(err.message)
@@ -33,8 +37,16 @@ export const useMutateTry = () => {
       return data[0]
     },
     {
-      onSuccess: (res) => {
-        revalidateSingle(res.daily_id)
+      onSuccess: (res, variables) => {
+        let previousTries = queryClient.getQueryData<Try[]>(['tries'])
+        if (!previousTries) previousTries = []
+        queryClient.setQueryData(
+          ['tries'],
+          previousTries.map((paramTry) =>
+            paramTry.id === variables.id ? res : paramTry
+          )
+        )
+        resetEditedTry()
       },
       onError: (err: any) => {
         throw new Error(err.message)
@@ -49,8 +61,14 @@ export const useMutateTry = () => {
       return data[0]
     },
     {
-      onSuccess: (res) => {
-        revalidateSingle(res.daily_id)
+      onSuccess: (_, variables) => {
+        let previousTries = queryClient.getQueryData<Try[]>(['tries'])
+        if (!previousTries) previousTries = []
+        queryClient.setQueryData(
+          ['tries'],
+          previousTries.filter((paramTry) => paramTry.id !== variables)
+        )
+        resetEditedTry()
       },
       onError: (err: any) => {
         throw new Error(err.message)
