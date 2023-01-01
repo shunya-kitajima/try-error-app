@@ -14,7 +14,7 @@ export const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
   const { deleteDailyMutation } = useMutateDaily()
 
   return (
-    <li className="my-3">
+    <li className="my-3 flex items-center justify-between">
       <Link
         href={`/daily/${id}`}
         prefetch={false}
