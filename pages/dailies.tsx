@@ -1,28 +1,11 @@
-import { NextPage, GetStaticProps } from 'next'
+import { NextPage } from 'next'
 import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
 import { supabase } from '../utils/supabase'
 import { Layout } from '../components/Layout'
 import { DailyForm } from '../components/DailyForm'
-import { Daily } from '../types'
-import DailyItem from '../components/DailyItem'
+import { DailyList } from '../components/DailyList'
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { data: dailies, error } = await supabase
-    .from('dailies')
-    .select('*')
-    .order('created_at', { ascending: true })
-  if (error) throw new Error(error.message)
-  return {
-    props: { dailies },
-    revalidate: false,
-  }
-}
-
-type StaticProps = {
-  dailies: Daily[]
-}
-
-const Dailies: NextPage<StaticProps> = ({ dailies }) => {
+const Dailies: NextPage = () => {
   const signOut = () => {
     supabase.auth.signOut()
   }
@@ -34,17 +17,7 @@ const Dailies: NextPage<StaticProps> = ({ dailies }) => {
         onClick={signOut}
       />
       <DailyForm />
-      <ul className="my-2">
-        {dailies?.map((daily) => (
-          <DailyItem
-            key={daily.id}
-            id={daily.id}
-            year={daily.year}
-            month={daily.month}
-            date={daily.date}
-          />
-        ))}
-      </ul>
+      <DailyList />
     </Layout>
   )
 }
