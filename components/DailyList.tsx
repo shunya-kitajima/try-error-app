@@ -1,9 +1,9 @@
 import React from 'react'
 import { supabase } from '../utils/supabase'
 import { useQueryDaily } from '../hooks/useQueryDaily'
-import DailyItem from './DailyItem'
+import { DailyItem } from './DailyItem'
 
-const DailyList: React.FC = () => {
+export const DailyList: React.FC = () => {
   const { data: dailies } = useQueryDaily(supabase.auth.user()?.id!)
 
   return (
@@ -20,5 +20,3 @@ const DailyList: React.FC = () => {
     </ul>
   )
 }
-
-export default DailyList

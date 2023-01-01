@@ -10,7 +10,7 @@ type Props = {
   date: string
 }
 
-const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
+export const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
   const { deleteDailyMutation } = useMutateDaily()
 
   return (
@@ -31,5 +31,3 @@ const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
     </li>
   )
 }
-
-export default DailyItem
