@@ -1,18 +1,21 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
-import { revalidateList, revalidateSingle } from '../utils/revalidation'
 import { Daily, EditedDaily } from '../types'
 
 export const useMutateDaily = () => {
+  const queryClient = useQueryClient()
+
   const createDailyMutation = useMutation(
     async (daily: Omit<Daily, 'id' | 'created_at' | 'tries'>) => {
       const { data, error } = await supabase.from('dailies').insert(daily)
       if (error) throw new Error(error.message)
-      return data
+      return data[0]
     },
     {
-      onSuccess: () => {
-        revalidateList()
+      onSuccess: (res) => {
+        let previousDailies = queryClient.getQueryData<Daily[]>(['dailies'])
+        if (!previousDailies) previousDailies = []
+        queryClient.setQueryData(['dailies'], [...previousDailies, res])
       },
       onError: (err: any) => {
         throw new Error(err.message)
@@ -30,8 +33,15 @@ export const useMutateDaily = () => {
       return data
     },
     {
-      onSuccess: (res) => {
-        revalidateSingle(res[0].id)
+      onSuccess: (res, variables) => {
+        let previousDailies = queryClient.getQueryData<Daily[]>(['dailies'])
+        if (!previousDailies) previousDailies = []
+        queryClient.setQueryData(
+          ['dailies'],
+          previousDailies.map((daily) =>
+            daily.id === variables.id ? res : daily
+          )
+        )
       },
       onError: (err: any) => {
         throw new Error(err.message)
@@ -49,8 +59,13 @@ export const useMutateDaily = () => {
       return data
     },
     {
-      onSuccess: () => {
-        revalidateList()
+      onSuccess: (_, variables) => {
+        let previousDailies = queryClient.getQueryData<Daily[]>(['dailies'])
+        if (!previousDailies) previousDailies = []
+        queryClient.setQueryData(
+          ['dailies'],
+          previousDailies.filter((daily) => daily.id !== variables)
+        )
       },
       onError: (err: any) => {
         throw new Error(err.message)
