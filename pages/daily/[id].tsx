@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useQueryClient } from '@tanstack/react-query'
 import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid'
+import useStore from '../../store'
 import { Layout } from '../../components/Layout'
 import { TryForm } from '../../components/TryForm'
 import { TryList } from '../../components/TryList'
@@ -13,6 +14,7 @@ const DailyPage: NextPage = () => {
   const queryclient = useQueryClient()
   const previousDailies = queryclient.getQueryData<Daily[]>(['dailies'])
   const targetDaily = previousDailies?.filter((daily) => daily.id === queryStr)
+  const { resetEditedTry } = useStore()
 
   return (
     <Layout title="Try and Error">
@@ -28,6 +30,7 @@ const DailyPage: NextPage = () => {
       <ChevronDoubleLeftIcon
         className="my-6 h-6 w-6 cursor-pointer text-blue-500"
         onClick={() => {
+          resetEditedTry()
           queryclient.removeQueries(['tries'])
           router.push('/dailies')
         }}
