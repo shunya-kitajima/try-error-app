@@ -1,5 +1,7 @@
-import { NextPage, GetStaticProps, GetStaticPaths } from 'next'
+import { NextPage } from 'next'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useQueryClient } from '@tanstack/react-query'
 import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid'
 import { supabase } from '../../utils/supabase'
 import { Layout } from '../../components/Layout'
@@ -7,59 +9,23 @@ import { TryForm } from '../../components/TryForm'
 import { TryItem } from '../../components/TryItem'
 import { Daily } from '../../types'
 
-const getAllDailyIds = async () => {
-  const { data: ids } = await supabase.from('dailies').select('id')
-  return ids!.map((id) => {
-    return {
-      params: {
-        id: id.id,
-      },
-    }
-  })
-}
+const DailyPage: NextPage = () => {
+  const router = useRouter()
+  const queryStr = String(router.query.id)
+  const queryclient = useQueryClient()
+  const previousDailies = queryclient.getQueryData<Daily[]>(['dailies'])
+  const targetDaily = previousDailies?.filter((daily) => daily.id === queryStr)
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllDailyIds()
-  return {
-    paths,
-    fallback: 'blocking',
-  }
-}
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const { data: daily } = await supabase
-    .from('dailies')
-    .select('*, tries(*)')
-    .eq('id', ctx.params?.id)
-    .single()
-  return {
-    props: {
-      daily,
-    },
-    revalidate: false,
-  }
-}
-
-type StaticProps = {
-  daily: Daily
-}
-
-const DailyPage: NextPage<StaticProps> = ({ daily }) => {
   return (
     <Layout title="Try and Error">
-      <p className="text-3xl font-semibold text-blue-500">{`${daily.year}/${daily.month}/${daily.date}`}</p>
-      <TryForm daily_id={daily.id} />
-      <ul className="my-2">
-        {daily.tries?.map((paramTry) => (
-          <TryItem
-            key={paramTry.id}
-            id={paramTry.id}
-            daily_id={paramTry.daily_id}
-            paramTry={paramTry.try}
-            result={paramTry.result}
-          />
-        ))}
-      </ul>
+      {targetDaily !== undefined ? (
+        <>
+          <p className="text-3xl font-semibold text-blue-500">{`${targetDaily[0].year}/${targetDaily[0].month}/${targetDaily[0].date}`}</p>
+          <TryForm daily_id={targetDaily[0].id} />
+        </>
+      ) : (
+        <p className="text-3xl font-semibold text-blue-500">not found</p>
+      )}
       <Link href="/dailies" passHref prefetch={false}>
         <ChevronDoubleLeftIcon className="my-6 h-6 w-6 cursor-pointer text-blue-500" />
       </Link>
