@@ -1,5 +1,4 @@
 import { NextPage } from 'next'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useQueryClient } from '@tanstack/react-query'
 import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid'
