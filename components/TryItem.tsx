@@ -39,7 +39,7 @@ export const TryItem: React.FC<Props> = ({
           onClick={() => deleteTryMutation.mutate(id)}
         />
       </div>
-      <div className="flex">{result}</div>
+      <div className="flex whitespace-pre-wrap break-words">{result}</div>
     </li>
   )
 }
