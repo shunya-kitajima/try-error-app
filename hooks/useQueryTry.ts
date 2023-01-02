@@ -16,6 +16,6 @@ export const useQueryTry = (dailyId: string) => {
   return useQuery<Try[], Error>({
     queryKey: ['tries'],
     queryFn: getTries,
-    staleTime: Infinity,
+    staleTime: 0,
   })
 }
