@@ -26,9 +26,13 @@ const DailyPage: NextPage = () => {
       ) : (
         <p className="text-3xl font-semibold text-blue-500">not found</p>
       )}
-      <Link href="/dailies" passHref prefetch={false}>
-        <ChevronDoubleLeftIcon className="my-6 h-6 w-6 cursor-pointer text-blue-500" />
-      </Link>
+      <ChevronDoubleLeftIcon
+        className="my-6 h-6 w-6 cursor-pointer text-blue-500"
+        onClick={() => {
+          queryclient.removeQueries(['tries'])
+          router.push('/dailies')
+        }}
+      />
     </Layout>
   )
 }
