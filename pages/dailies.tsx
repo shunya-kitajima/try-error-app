@@ -11,7 +11,7 @@ const Dailies: NextPage = () => {
 
   const signOut = () => {
     queryClient.removeQueries(['dailies'])
-    queryClient.removeQueries(['tryies'])
+    queryClient.removeQueries(['tries'])
     supabase.auth.signOut()
   }
 
