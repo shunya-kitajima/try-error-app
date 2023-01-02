@@ -20,10 +20,9 @@ export const TryItem: React.FC<Props> = ({
   const { deleteTryMutation } = useMutateTry()
 
   return (
-    <li className="my-3 flex items-center justify-between">
-      <div className="flex">{paramTry}</div>
-      <div className="flex">{result}</div>
+    <li className="my-3 items-center">
       <div className="flex">
+        <div className="flex">{paramTry}</div>
         <PencilIcon
           className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
           onClick={() =>
@@ -40,6 +39,7 @@ export const TryItem: React.FC<Props> = ({
           onClick={() => deleteTryMutation.mutate(id)}
         />
       </div>
+      <div className="flex">{result}</div>
     </li>
   )
 }
