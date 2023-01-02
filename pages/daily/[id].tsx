@@ -3,10 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useQueryClient } from '@tanstack/react-query'
 import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid'
-import { supabase } from '../../utils/supabase'
 import { Layout } from '../../components/Layout'
 import { TryForm } from '../../components/TryForm'
-import { TryItem } from '../../components/TryItem'
 import { Daily } from '../../types'
 
 const DailyPage: NextPage = () => {
