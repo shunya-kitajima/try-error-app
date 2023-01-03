@@ -85,14 +85,14 @@ export const DailyForm: React.FC = () => {
       <div className=" flex flex-col items-center">
         <button
           type="button"
-          className="w-25 mb-2.5 rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
+          className="w-25 mb-2.5 rounded-md bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
           onClick={(e) => addDailyHandler(e)}
         >
           add Daily
         </button>
         <button
           type="button"
-          className="w-25 rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
+          className="w-25 rounded-md bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
           onClick={(e) => takeOverPrevDailyHandler(e)}
         >
           take over previous Dayily
