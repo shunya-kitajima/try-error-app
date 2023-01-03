@@ -36,17 +36,17 @@ export const DailyForm: React.FC = () => {
 
   return (
     <>
-      <div className="flex items-center justify-around">
+      <div className=" flex flex-col items-center">
         <button
           type="button"
-          className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
+          className="w-25 mb-2.5 rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
           onClick={(e) => addDailyHandler(e)}
         >
           add Daily
         </button>
         <button
           type="button"
-          className="w-25 flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
+          className="w-25 rounded-md bg-indigo-600 px-4 py-2 text-sm text-white"
         >
           take over previous Dayily
         </button>
