@@ -1,10 +1,13 @@
 import React, { MouseEvent } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 import { supabase } from '../utils/supabase'
 import { useMutateDaily } from '../hooks/useMutateDaily'
 import { Spinner } from './Spinner'
+import { Daily } from '../types'
 
 export const DailyForm: React.FC = () => {
   const { createDailyMutation } = useMutateDaily()
+  const queryclient = useQueryClient()
 
   const addDailyHandler = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -12,12 +15,16 @@ export const DailyForm: React.FC = () => {
     const year = now.getFullYear()
     const month = now.getMonth() + 1
     const date = now.getDate()
+    const ymd = `${year}/${month}/${date}`
+    const previousDailies = queryclient.getQueryData<Daily[]>(['dailies'])
+    const todayDaily = previousDailies?.filter((daily) => daily.ymd === ymd)
+    if (todayDaily?.length !== 0) alert('今日の分は既に作成されています')
     await createDailyMutation.mutateAsync({
       user_id: supabase.auth.user()?.id!,
       year: String(year),
       month: String(month),
       date: String(date),
-      ymd: `${year}/${month}/${date}`,
+      ymd: ymd,
     })
   }
 
