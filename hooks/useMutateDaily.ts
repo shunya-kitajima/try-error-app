@@ -6,7 +6,7 @@ export const useMutateDaily = () => {
   const queryClient = useQueryClient()
 
   const createDailyMutation = useMutation(
-    async (daily: Omit<Daily, 'id' | 'created_at' | 'tries'>) => {
+    async (daily: Omit<Daily, 'id' | 'created_at'>) => {
       const { data, error } = await supabase.from('dailies').insert(daily)
       if (error) throw new Error(error.message)
       return data[0]
@@ -16,32 +16,6 @@ export const useMutateDaily = () => {
         let previousDailies = queryClient.getQueryData<Daily[]>(['dailies'])
         if (!previousDailies) previousDailies = []
         queryClient.setQueryData(['dailies'], [...previousDailies, res])
-      },
-      onError: (err: any) => {
-        throw new Error(err.message)
-      },
-    }
-  )
-
-  const updateDailyMutation = useMutation(
-    async (daily: EditedDaily) => {
-      const { data, error } = await supabase
-        .from('dailies')
-        .update({ year: daily.year, month: daily.month, date: daily.date })
-        .eq('id', daily.id)
-      if (error) throw new Error(error.message)
-      return data
-    },
-    {
-      onSuccess: (res, variables) => {
-        let previousDailies = queryClient.getQueryData<Daily[]>(['dailies'])
-        if (!previousDailies) previousDailies = []
-        queryClient.setQueryData(
-          ['dailies'],
-          previousDailies.map((daily) =>
-            daily.id === variables.id ? res : daily
-          )
-        )
       },
       onError: (err: any) => {
         throw new Error(err.message)
