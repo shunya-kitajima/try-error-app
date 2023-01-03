@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
 import useStore from '../store'
 import { useMutateTry } from '../hooks/useMutateTry'
@@ -10,12 +10,7 @@ type Props = {
   result: string
 }
 
-export const TryItem: React.FC<Props> = ({
-  id,
-  daily_id,
-  paramTry,
-  result,
-}) => {
+const TryItem: React.FC<Props> = ({ id, daily_id, paramTry, result }) => {
   const { updateEditedTry } = useStore()
   const { deleteTryMutation } = useMutateTry()
 
@@ -43,3 +38,5 @@ export const TryItem: React.FC<Props> = ({
     </li>
   )
 }
+
+export const TryItemMemo = memo(TryItem)

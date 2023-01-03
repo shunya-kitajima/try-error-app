@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useQueryTry } from '../hooks/useQueryTry'
-import { TryItem } from './TryItem'
+import { TryItemMemo } from './TryItem'
 
 type Props = {
   daily_id: string
 }
 
-export const TryList: React.FC<Props> = ({ daily_id }) => {
+const TryList: React.FC<Props> = ({ daily_id }) => {
   const { data: tries } = useQueryTry(daily_id)
 
   return (
     <ul>
       {tries?.map((tr) => (
-        <TryItem
+        <TryItemMemo
           key={tr.id}
           id={tr.id}
           daily_id={tr.daily_id}
@@ -23,3 +23,5 @@ export const TryList: React.FC<Props> = ({ daily_id }) => {
     </ul>
   )
 }
+
+export const TryListMemo = memo(TryList)

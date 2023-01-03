@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react'
+import React, { memo, FormEvent } from 'react'
 import useStore from '../store'
 import { supabase } from '../utils/supabase'
 import { useMutateTry } from '../hooks/useMutateTry'
@@ -8,7 +8,7 @@ type Props = {
   daily_id: string
 }
 
-export const TryForm: React.FC<Props> = ({ daily_id }) => {
+const TryForm: React.FC<Props> = ({ daily_id }) => {
   const { editedTry } = useStore()
   const { updateEditedTry } = useStore()
   const { createTryMutation, updateTryMutation } = useMutateTry()
@@ -71,3 +71,5 @@ export const TryForm: React.FC<Props> = ({ daily_id }) => {
     </form>
   )
 }
+
+export const TryFormMemo = memo(TryForm)
