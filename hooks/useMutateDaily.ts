@@ -47,5 +47,5 @@ export const useMutateDaily = () => {
     }
   )
 
-  return { createDailyMutation, updateDailyMutation, deleteDailyMutation }
+  return { createDailyMutation, deleteDailyMutation }
 }
