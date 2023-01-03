@@ -17,6 +17,7 @@ export const DailyForm: React.FC = () => {
       year: String(year),
       month: String(month),
       date: String(date),
+      ymd: `${year}/${month}/${date}`,
     })
   }
 
