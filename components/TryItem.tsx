@@ -17,7 +17,7 @@ const TryItem: React.FC<Props> = ({ id, daily_id, paramTry, result }) => {
   return (
     <li className="my-3 items-center">
       <div className="flex">
-        <div className="flex font-semibold">{paramTry}</div>
+        <div className="flex w-60 font-semibold">{paramTry}</div>
         <PencilIcon
           className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
           onClick={() =>
@@ -34,7 +34,9 @@ const TryItem: React.FC<Props> = ({ id, daily_id, paramTry, result }) => {
           onClick={() => deleteTryMutation.mutate(id)}
         />
       </div>
-      <div className="flex whitespace-pre-wrap break-words">{result}</div>
+      <div className="ml-2.5 flex whitespace-pre-wrap break-words">
+        {result}
+      </div>
     </li>
   )
 }
