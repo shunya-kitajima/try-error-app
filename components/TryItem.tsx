@@ -22,7 +22,7 @@ export const TryItem: React.FC<Props> = ({
   return (
     <li className="my-3 items-center">
       <div className="flex">
-        <div className="flex">{paramTry}</div>
+        <div className="flex font-semibold">{paramTry}</div>
         <PencilIcon
           className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
           onClick={() =>
