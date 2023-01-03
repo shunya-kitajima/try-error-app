@@ -26,6 +26,25 @@ export const useMutateTry = () => {
     }
   )
 
+  const createTryMultipleMutation = useMutation(
+    async (paramTry: Omit<Try, 'id' | 'created_at'>[]) => {
+      const { data, error } = await supabase.from('tries').insert(paramTry)
+      if (error) throw new Error(error.message)
+      return data[0]
+    },
+    {
+      onSuccess: (res) => {
+        let previousTries = queryClient.getQueryData<Try[]>(['tries'])
+        if (!previousTries) previousTries = []
+        queryClient.setQueryData(['tries'], [...previousTries, res])
+        resetEditedTry()
+      },
+      onError: (err: any) => {
+        throw new Error(err.message)
+      },
+    }
+  )
+
   const updateTryMutation = useMutation(
     async (paramTry: EditedTry) => {
       const { data, error } = await supabase
@@ -75,5 +94,10 @@ export const useMutateTry = () => {
     }
   )
 
-  return { createTryMutation, updateTryMutation, deleteTryMutation }
+  return {
+    createTryMutation,
+    createTryMultipleMutation,
+    updateTryMutation,
+    deleteTryMutation,
+  }
 }
