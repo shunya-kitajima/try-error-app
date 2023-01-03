@@ -18,7 +18,10 @@ export const DailyForm: React.FC = () => {
     const ymd = `${year}/${month}/${date}`
     const previousDailies = queryclient.getQueryData<Daily[]>(['dailies'])
     const todayDaily = previousDailies?.filter((daily) => daily.ymd === ymd)
-    if (todayDaily?.length !== 0) alert('今日の分は既に作成されています')
+    if (todayDaily?.length !== 0) {
+      alert('今日の分は既に作成されています')
+      return
+    }
     await createDailyMutation.mutateAsync({
       user_id: supabase.auth.user()?.id!,
       year: String(year),
