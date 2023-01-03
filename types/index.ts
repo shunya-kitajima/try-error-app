@@ -5,6 +5,7 @@ export type Daily = {
   year: string
   month: string
   date: string
+  ymd: string
 }
 
 export type Try = {
@@ -16,6 +17,6 @@ export type Try = {
   result: string
 }
 
-export type EditedDaily = Omit<Daily, 'created_at' | 'user_id' | 'tries'>
+export type EditedDaily = Omit<Daily, 'created_at' | 'user_id' | 'ymd'>
 
 export type EditedTry = Omit<Try, 'created_at' | 'user_id'>
