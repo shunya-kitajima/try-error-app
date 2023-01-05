@@ -8,6 +8,7 @@ describe('dailies', () => {
     cy.get('[data-testid="logout"]').should('be.visible')
   })
   it('Shall daily create and delete fine', () => {
+    cy.get('[data-testid="ul-daily"]').children().should('have.length', 3)
     cy.get('[data-testid="addDaily"]').click()
     cy.get('[data-testid="ul-daily"]').children().should('have.length', 4)
     cy.get('[data-testid="ul-daily"]')
