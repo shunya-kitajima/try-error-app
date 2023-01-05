@@ -9,6 +9,7 @@ describe('tries', () => {
   })
   it('shall navigate to dailydetail page', () => {
     cy.get('[data-testid="ul-daily"]').children().should('have.length', 0)
+    cy.wait(5000)
     cy.get('[data-testid="addDaily"]').click()
     cy.get('[data-testid="ul-daily"]').children().should('have.length', 1)
     cy.get('[data-testid="ul-daily"]')
