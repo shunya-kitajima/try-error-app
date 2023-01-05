@@ -15,6 +15,11 @@ describe('tries', () => {
       .children()
       .last()
       .should('have.text', '2023/1/5')
+    cy.get('[data-testid="link-to-try-0"]').click()
+    cy.get('[data-testid="try-input"]').should('be.visible')
+    cy.get('[data-testid="result-input"]').should('be.visible')
+    cy.get('[data-testid="btn-try"]').should('be.visible')
+    cy.get('[data-testid="back-to-index"]').should('be.visible')
   })
 })
 export {}
