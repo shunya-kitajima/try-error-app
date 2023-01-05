@@ -7,7 +7,7 @@ export const DailyList: React.FC = () => {
   const { data: dailies } = useQueryDaily(supabase.auth.user()?.id!)
 
   return (
-    <ul>
+    <ul data-testid="ul-daily">
       {dailies?.map((daily) => (
         <DailyItem
           key={daily.id}

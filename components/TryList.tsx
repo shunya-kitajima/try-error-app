@@ -10,7 +10,7 @@ const TryList: React.FC<Props> = ({ daily_id }) => {
   const { data: tries } = useQueryTry(daily_id)
 
   return (
-    <ul>
+    <ul data-testid="ul-try">
       {tries?.map((tr) => (
         <TryItemMemo
           key={tr.id}
