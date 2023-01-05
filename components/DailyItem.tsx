@@ -8,9 +8,16 @@ type Props = {
   year: string
   month: string
   date: string
+  index: number
 }
 
-export const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
+export const DailyItem: React.FC<Props> = ({
+  id,
+  year,
+  month,
+  date,
+  index,
+}) => {
   const { deleteDailyMutation } = useMutateDaily()
 
   return (
@@ -18,6 +25,7 @@ export const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
       <Link
         href={`/daily/${id}`}
         prefetch={false}
+        data-testid={`link-to-try-${index}`}
         className="cursor-pointer hover:text-pink-600"
       >
         {`${year}/${month}/${date}`}
