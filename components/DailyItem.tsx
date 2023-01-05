@@ -24,6 +24,7 @@ export const DailyItem: React.FC<Props> = ({ id, year, month, date }) => {
       </Link>
       <div className="flex">
         <TrashIcon
+          data-testid={`trash-daily-${year}/${month}/${date}`}
           className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
           onClick={() => deleteDailyMutation.mutate(id)}
         />

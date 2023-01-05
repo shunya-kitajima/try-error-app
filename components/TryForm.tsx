@@ -63,6 +63,7 @@ const TryForm: React.FC<Props> = ({ daily_id }) => {
       <div className="my-2 flex justify-center">
         <button
           type="submit"
+          data-testid="btn-try"
           className="ml-2 cursor-pointer rounded bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-40"
           disabled={editedTry.try === '' || editedTry.result === ''}
         >
