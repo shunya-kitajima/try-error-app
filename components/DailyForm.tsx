@@ -85,6 +85,7 @@ export const DailyForm: React.FC = () => {
       <div className=" flex flex-col items-center">
         <button
           type="button"
+          data-testid="addDaily"
           className="w-25 mb-2.5 rounded-md bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
           onClick={(e) => addDailyHandler(e)}
         >
@@ -92,6 +93,7 @@ export const DailyForm: React.FC = () => {
         </button>
         <button
           type="button"
+          data-testid="takeOverPrevDaily"
           className="w-25 rounded-md bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
           onClick={(e) => takeOverPrevDailyHandler(e)}
         >
