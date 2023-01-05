@@ -21,5 +21,17 @@ describe('dailies', () => {
       .children()
       .should('not.have.text', '2023/1/5')
   })
+  it('Shall daily not create when have today daily', () => {
+    cy.get('[data-testid="ul-daily"]').children().should('have.length', 3)
+    cy.get('[data-testid="addDaily"]').click()
+    cy.get('[data-testid="ul-daily"]').children().should('have.length', 4)
+    cy.get('[data-testid="ul-daily"]')
+      .children()
+      .last()
+      .should('have.text', '2023/1/5')
+    cy.get('[data-testid="addDaily"]').click()
+    cy.get('[data-testid="takeOverPrevDaily"]').click()
+    cy.get('[data-testid="ul-daily"]').children().should('have.length', 4)
+  })
 })
 export {}
