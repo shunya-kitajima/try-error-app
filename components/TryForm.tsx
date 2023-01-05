@@ -40,6 +40,7 @@ const TryForm: React.FC<Props> = ({ daily_id }) => {
       <div>
         <input
           type="text"
+          data-testid="try-input"
           className="my-2 rounded border border-gray-300 px-3 py-2 text-sm placeholder-gray-500 focus:border-indigo-500 focus:outline-none"
           placeholder="try"
           value={editedTry.try}
@@ -52,6 +53,7 @@ const TryForm: React.FC<Props> = ({ daily_id }) => {
         <textarea
           cols={50}
           rows={10}
+          data-testid="result-input"
           className="my-2 rounded border border-gray-300 px-3 py-2 text-sm placeholder-gray-500 focus:border-indigo-500 focus:outline-none"
           placeholder="result"
           value={editedTry.result}
