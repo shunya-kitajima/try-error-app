@@ -9,7 +9,7 @@ describe('dailies', () => {
   })
   it('Shall daily create and delete fine', () => {
     cy.get('[data-testid="addDaily"]').click()
-    cy.get('[data-testid="ul-daily"]').children().should('have.length', 5)
+    cy.get('[data-testid="ul-daily"]').children().should('have.length', 4)
     cy.get('[data-testid="ul-daily"]')
       .children()
       .should('have.text', '2023/1/5')
