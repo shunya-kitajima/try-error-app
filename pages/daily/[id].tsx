@@ -20,7 +20,7 @@ const DailyPage: NextPage = () => {
     <Layout title="Try and Error">
       {targetDaily !== undefined ? (
         <>
-          <p className="text-3xl font-semibold text-blue-500">{`${targetDaily[0].year}/${targetDaily[0].month}/${targetDaily[0].date}`}</p>
+          <p className="text-3xl font-semibold text-blue-500">{`${targetDaily[0].ymd}`}</p>
           <TryFormMemo daily_id={targetDaily[0].id} />
           <TryListMemo daily_id={targetDaily[0].id} />
         </>
