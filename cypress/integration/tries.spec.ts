@@ -44,6 +44,7 @@ describe('tries', () => {
     cy.get('[data-testid="result-input"]').should('be.visible')
     cy.get('[data-testid="btn-try"]').should('be.visible')
     cy.get('[data-testid="ul-try"]').children().should('have.length', 0)
+
     cy.get('input[placeholder="try"]').type('腕立て伏せ10回')
     cy.get('textarea[placeholder="result"]').type('顎を床に付ける\n休まない')
     cy.get('[data-testid="btn-try"]').click()
@@ -55,6 +56,20 @@ describe('tries', () => {
     cy.get('[data-testid="result-0"]').should(
       'have.text',
       '顎を床に付ける\n休まない'
+    )
+    cy.get('[data-testid="pencil-0"]').should('be.visible')
+    cy.get('[data-testid="trash-0"]').should('be.visible')
+
+    cy.get('[data-testid="pencil-0"]').click()
+    cy.get('input[placeholder="try"]').type('2セット')
+    cy.get('textarea[placeholder="result"]').type('\n身体全体を動かす')
+    cy.get('[data-testid="btn-try"]').should('have.text', 'update')
+    cy.get('[data-testid="btn-try"]').click()
+    cy.wait(5000)
+    cy.get('[data-testid="try-0"]').should('have.text', '腕立て伏せ10回2セット')
+    cy.get('[data-testid="result-0"]').should(
+      'have.text',
+      '顎を床に付ける\n休まない\n身体全体を動かす'
     )
   })
 })
