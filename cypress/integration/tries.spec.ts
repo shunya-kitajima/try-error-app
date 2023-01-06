@@ -71,6 +71,10 @@ describe('tries', () => {
       'have.text',
       '顎を床に付ける\n休まない\n身体全体を動かす'
     )
+
+    cy.get('[data-testid="trash-0"]').click()
+    cy.wait(5000)
+    cy.get('[data-testid="ul-try"]').children().should('have.length', 0)
   })
 })
 export {}
