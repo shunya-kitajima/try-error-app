@@ -11,15 +11,24 @@ type Props = {
   index: number
 }
 
-const TryItem: React.FC<Props> = ({ id, daily_id, paramTry, result }) => {
+const TryItem: React.FC<Props> = ({
+  id,
+  daily_id,
+  paramTry,
+  result,
+  index,
+}) => {
   const { updateEditedTry } = useStore()
   const { deleteTryMutation } = useMutateTry()
 
   return (
     <li className="my-3 items-center">
       <div className="flex">
-        <div className="flex w-60 font-semibold">{paramTry}</div>
+        <div data-testid={`try-${index}`} className="flex w-60 font-semibold">
+          {paramTry}
+        </div>
         <PencilIcon
+          data-testid={`pencil-${index}`}
           className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
           onClick={() =>
             updateEditedTry({
@@ -31,11 +40,15 @@ const TryItem: React.FC<Props> = ({ id, daily_id, paramTry, result }) => {
           }
         />
         <TrashIcon
+          data-testid={`trash-${index}`}
           className="h-5 w-5 cursor-pointer text-blue-500"
           onClick={() => deleteTryMutation.mutate(id)}
         />
       </div>
-      <div className="ml-2.5 flex whitespace-pre-wrap break-words">
+      <div
+        data-testid={`result-${index}`}
+        className="ml-2.5 flex whitespace-pre-wrap break-words"
+      >
         {result}
       </div>
     </li>
