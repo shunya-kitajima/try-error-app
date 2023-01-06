@@ -8,6 +8,7 @@ type Props = {
   daily_id: string
   paramTry: string
   result: string
+  index: number
 }
 
 const TryItem: React.FC<Props> = ({ id, daily_id, paramTry, result }) => {

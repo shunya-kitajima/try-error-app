@@ -11,13 +11,14 @@ const TryList: React.FC<Props> = ({ daily_id }) => {
 
   return (
     <ul data-testid="ul-try">
-      {tries?.map((tr) => (
+      {tries?.map((tr, i) => (
         <TryItemMemo
           key={tr.id}
           id={tr.id}
           daily_id={tr.daily_id}
           paramTry={tr.try}
           result={tr.result}
+          index={i}
         />
       ))}
     </ul>
