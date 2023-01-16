@@ -8,6 +8,11 @@ export const DailyList: React.FC = () => {
   const sortedDailies = dailies?.sort((a, b) => {
     return a.ymd < b.ymd ? 1 : -1
   })
+  const yearMonthArray: string[] = []
+  sortedDailies?.map((daily) => {
+    if (!yearMonthArray.includes(`${daily.year}/${daily.month}`))
+      yearMonthArray.push(`${daily.year}/${daily.month}`)
+  })
 
   return (
     <ul data-testid="ul-daily">
