@@ -21,7 +21,6 @@ export const DailyList: React.FC = () => {
       })
     }
   })
-  console.log(yearMonthArray)
 
   return (
     <>
