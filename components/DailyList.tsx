@@ -5,10 +5,13 @@ import { DailyItem } from './DailyItem'
 
 export const DailyList: React.FC = () => {
   const { data: dailies } = useQueryDaily(supabase.auth.user()?.id!)
+  const sortedDailies = dailies?.sort((a, b) => {
+    return a.ymd < b.ymd ? 1 : -1
+  })
 
   return (
     <ul data-testid="ul-daily">
-      {dailies?.map((daily, i) => (
+      {sortedDailies?.map((daily, i) => (
         <DailyItem
           key={daily.id}
           id={daily.id}
