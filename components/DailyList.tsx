@@ -2,6 +2,7 @@ import React from 'react'
 import { supabase } from '../utils/supabase'
 import { useQueryDaily } from '../hooks/useQueryDaily'
 import { DailyItem } from './DailyItem'
+import { Daily } from '../types'
 
 export const DailyList: React.FC = () => {
   const { data: dailies } = useQueryDaily(supabase.auth.user()?.id!)
@@ -9,23 +10,38 @@ export const DailyList: React.FC = () => {
     return a.ymd < b.ymd ? 1 : -1
   })
   const yearMonthArray: string[] = []
+  const yearMonthData: any[] = []
   sortedDailies?.map((daily) => {
-    if (!yearMonthArray.includes(`${daily.year}/${daily.month}`))
+    if (!yearMonthArray.includes(`${daily.year}/${daily.month}`)) {
       yearMonthArray.push(`${daily.year}/${daily.month}`)
+      yearMonthData.push({
+        [`${daily.year}/${daily.month}`]: sortedDailies?.filter(
+          (data) => daily.year === data.year && daily.month === data.month
+        ),
+      })
+    }
   })
+  console.log(yearMonthArray)
 
   return (
-    <ul data-testid="ul-daily">
-      {sortedDailies?.map((daily, i) => (
-        <DailyItem
-          key={daily.id}
-          id={daily.id}
-          year={daily.year}
-          month={daily.month}
-          date={daily.date}
-          index={i}
-        />
+    <>
+      {yearMonthData?.map((yearMonth, i) => (
+        <details key={i}>
+          <summary>{yearMonthArray[i]}</summary>
+          <ul>
+            {yearMonth[yearMonthArray[i]].map((daily: Daily, j: number) => (
+              <DailyItem
+                key={daily.id}
+                id={daily.id}
+                year={daily.year}
+                month={daily.month}
+                date={daily.date}
+                index={j}
+              />
+            ))}
+          </ul>
+        </details>
       ))}
-    </ul>
+    </>
   )
 }
