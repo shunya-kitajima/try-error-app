@@ -27,7 +27,9 @@ export const DailyList: React.FC = () => {
     <>
       {yearMonthData?.map((yearMonth, i) => (
         <details key={i}>
-          <summary>{yearMonthArray[i]}</summary>
+          <summary className="cursor-pointer hover:text-pink-600">
+            {yearMonthArray[i]}
+          </summary>
           <ul>
             {yearMonth[yearMonthArray[i]].map((daily: Daily, j: number) => (
               <DailyItem
