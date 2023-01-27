@@ -41,7 +41,10 @@ export const DailyForm: React.FC = () => {
     e.preventDefault()
     const now = new Date()
     const year = now.getFullYear()
-    const month = now.getMonth() + 1
+    const month =
+      now.getMonth() + 1 > 10
+        ? now.getMonth() + 1
+        : '0' + String(now.getMonth() + 1)
     const date = now.getDate()
     const ymd = `${year}/${month}/${date}`
     let previousDailies = queryclient.getQueryData<Daily[]>(['dailies'])
