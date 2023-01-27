@@ -50,11 +50,9 @@ export const DailyForm: React.FC = () => {
       alert('今日の分は既に作成されています')
       return
     }
-    const prevDaily = previousDailies?.filter(
-      (daily) => daily.ymd === `${year}/${month}/${date - 1}`
-    )
-    if (prevDaily?.length === 0) {
-      alert('前日の分がありません')
+    const prevDaily = previousDailies ? previousDailies[0] : undefined
+    if (prevDaily === undefined) {
+      alert('前回の分がありません')
       return
     }
     await createDailyMutation.mutateAsync({
@@ -69,7 +67,7 @@ export const DailyForm: React.FC = () => {
     const { data: prevTries } = await supabase
       .from('tries')
       .select('*')
-      .eq('daily_id', prevDaily !== undefined ? prevDaily[0].id : '')
+      .eq('daily_id', prevDaily !== undefined ? prevDaily.id : '')
     const createData = prevTries?.map((paramTry) => {
       return {
         user_id: supabase.auth.user()?.id!,
